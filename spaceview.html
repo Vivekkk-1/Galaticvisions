@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Space Image Viewer</title>
+  <style>
+    body {
+      background-image: url('blue-milky-way-galaxy-4k-7y-1360x768.jpg');
+      background-size: cover;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    h1 {
+      color: #fff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+    .input-container {
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+    }
+    .input-container label {
+      margin-right: 10px;
+      color: #fff;
+    }
+    .input-container input[type="text"] {
+      padding: 8px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .input-container button {
+      padding: 8px 16px;
+      font-size: 16px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    #image-container {
+      margin-top: 20px;
+      text-align: center;
+      color: #fff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    }
+    #image-container img {
+      max-width: 100%;
+      width: 500px; /* Set a fixed width for the images */
+      border-radius: 4px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+    #image-container p {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    #image-container .info {
+      margin-top: 20px;
+      font-size: 16px;
+    }
+    .headStyle{
+			font-family: cursive;
+ 			color: lightslategray ;
+			text-align: center;
+			font-size: 50px;
+			margin-top: 10px;
+		}	
+		nav ul{
+			text-align: center;
+		}
+	
+		nav li{
+			display:inline-block ;
+	
+		}
+		nav li a{
+			font-size: 17px;
+			padding: 25px 20px ;
+			color: lightslategray;
+			text-decoration: none;
+			letter-spacing: 2px;
+			font-weight: bolder;
+		}
+	
+		nav li:hover a{
+			color:rgba(56, 56, 181, 0.92);
+			font-weight: bolder;
+		} 
+  </style>
+</head>
+<div class="headStyle">GalaticVisions
+  <hr style="width: 900px;">
+</div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="spaceview.html">Events</a></li>
+        <li><a href="3dmodel.html">3D Model</a></li>
+        <li><a href="quiz.html">Quiz</a></li>
+        
+    </ul>
+  </nav>
+</div>
+<body>
+  <div class="container">
+    <h1>Space Image Viewer</h1>
+    <div class="input-container">
+      <label for="date-input">Enter Date (YYYY-MM-DD):</label>
+      <input type="text" id="date-input">
+      <button onclick="getImageByDate()">Get Image</button>
+    </div>
+    <div id="image-container"></div>
+  </div>
+
+  <script>
+    function getImageByDate() {
+      const dateInput = document.getElementById('date-input').value;
+      const apiUrl = `https://api.nasa.gov/planetary/apod?date=${dateInput}&api_key=nqTsDAm2pgZkH9f8ZAC3aaQwK6mpKRcAIaydGivW`;
+      fetch(apiUrl)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Failed to fetch image');
+          }
+          return response.json();
+        })
+        .then(data => {
+          displayImage(data.url, data.title, data.explanation);
+        })
+        .catch(error => {
+          console.error(error);
+          displayImage('', 'Failed to fetch image', '');
+        });
+    }
+
+    function displayImage(imageUrl, title, explanation) {
+      const imageContainer = document.getElementById('image-container');
+      if (imageUrl) {
+        imageContainer.innerHTML = `
+          <img src="${imageUrl}" alt="Space Image">
+          <p>${title}</p>
+          <div class="info">${explanation}</div>
+        `;
+      } else {
+        imageContainer.innerHTML = `
+          <p>${title}</p>
+        `;
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - GalacticVisions</title>
+    <link rel="stylesheet" href="img.css">
+</head>
+<body>
+
+    <div class="headStyle">GalacticVisions
+        <hr style="width: 900px;">
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="spaceview.html">Events</a></li>
+            <li><a href="3dmodel.html">3D Model</a></li>
+            <li><a href="quiz.html">Quiz</a></li>
+        </ul>
+    </nav>
+
+    <h1>Explore the Universe</h1>
+
+    <div id="app">
+        <div class="grid">
+            <div v-for="(image, index) in images" :key="index" class="grid_item">
+                <img :src="image.src" :alt="image.alt || 'Gallery Image'">
+            </div>
+        </div>
+    </div>
+
+    <!-- Load Vue.js and Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    <script src="img.js"></script>
+
+</body>
+</html>

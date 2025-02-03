@@ -1,0 +1,81 @@
+:root {
+  --color: #ffffff;
+  --main-bg-color: #141412;
+  --spacing: 2rem;
+}
+
+html {
+  background-image: url('blue-milky-way-galaxy-4k-7y-1360x768.jpg'); /* Replace with a valid background */
+  background-size: cover;
+  background-attachment: fixed;
+  overflow-x: hidden; 
+}
+
+body {
+  font-family: Arial, sans-serif;
+  color: lightslategray;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header */
+.headStyle {
+  font-family: cursive;
+  color: lightslategray;
+  text-align: center;
+  font-size: 50px;
+  margin-top: 10px;
+}
+
+/* Navigation */
+nav ul {
+  text-align: center;
+  padding: 10px;
+}
+
+nav li {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+nav li a {
+  font-size: 17px;
+  padding: 10px 20px;
+  color: lightslategray;
+  text-decoration: none;
+  letter-spacing: 2px;
+  font-weight: bolder;
+  transition: color 0.3s;
+}
+
+nav li a:hover {
+  color: rgba(56, 56, 181, 0.92);
+}
+
+/* Gallery Grid */
+.grid {
+  display: grid;
+  grid-gap: var(--spacing);
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-auto-rows: auto;
+  padding: 5% 10%;
+}
+
+.grid_item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease-in-out;
+}
+
+.grid_item:hover {
+  transform: scale(1.05);
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}

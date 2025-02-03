@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <title>3D Planet & Object Viewer</title>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js"></script>
+    <script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <style>
+        /* Reset some default styles */
+        body,
+        h1,
+        h2,
+        h3,
+        p,
+        ul,
+        li {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Apply a global font and background */
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url(blue-milky-way-galaxy-4k-7y-1360x768.jpg);
+            background-size: cover;
+            color: lightslategray;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Navigation styles */
+        nav {
+            text-align: center;
+
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style: none;
+        }
+
+        nav li {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        nav li a {
+            font-size: 17px;
+            padding: 10px 20px;
+            color: lightslategray;
+            text-decoration: none;
+            letter-spacing: 2px;
+            font-weight: bolder;
+            transition: color 0.3s;
+        }
+
+        nav li a:hover {
+            color: rgba(56, 56, 181, 0.92);
+        }
+
+        /* Header styles */
+        .headStyle {
+            font-family: cursive;
+            font-size: 50px;
+            text-align: center;
+            margin-top: 10px;
+            color: lightslategray;
+        }
+
+        /* Container styles */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: rgba(207, 226, 35, 0.816);
+            margin-bottom: 20px;
+        }
+
+        /* Input container styles */
+        .input-container {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-container label {
+            margin-right: 10px;
+            color: #a2fff9;
+        }
+
+        .input-container input[type="text"] {
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .input-container button {
+            padding: 8px 16px;
+            font-size: 16px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Model container styles */
+        #model-container {
+        max-width: 90%;
+        max-height: 300px;
+        border-radius: 4px;
+        box-shadow: 0 0 5px rgba(21, 22, 21, 0.3);
+        margin-top: 20px;
+        margin-bottom: auto;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Container for the model and details */
+    .model-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Details container styles */
+    #details-container {
+        max-width: 100%; /* Adjust the width to your preference */
+        text-align: left;
+        color: white;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="headStyle">3D Planet & Object Viewer
+        <hr style="width: 900px;">
+    </div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="spaceview.html">Events</a></li>
+            <li><a href="3dmodel.html">3D Model</a></li>
+            <li><a href="quiz.html">Quiz</a></li>
+        </ul>
+    </nav>
+    <div class="stars"></div>
+    <div class="container">
+        <h1>3D Planet & Object Viewer</h1>
+        <div class="input-container">
+            <label for="planet-input" style="color: #a2fff9;">Enter Planet or Object Name:</label>
+            <input type="text" id="planet-input">
+            <button onclick="displayModel()">View Model</button>
+        </div>
+        <div id="details-container"></div>
+        <div id="model-container">
+            <div class="model-content">
+                <model-viewer src="${planet.modelUrl}" auto-rotate camera-controls alt="${input} Model"></model-viewer>
+                <div id="details-container">
+                    <p><strong>Name:</strong> ${input}</p>
+                    <p><strong>Diameter:</strong> ${planet.diameter}</p>
+                    <p><strong>Distance from the Sun:</strong> ${planet.distance}</p>
+                    <p><strong>Number of Moons:</strong> ${planet.moons}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+        const modelData = {
+            Mercury: {
+                modelUrl: "GLB/Mercury.glb",
+                diameter: "4,879 km",
+                distance: "57.9 million km",
+                moons: "0"
+            },
+            Venus: {
+                modelUrl: "GLB/Venus.glb",
+                diameter: "12,104 km",
+                distance: "108.2 million km",
+                moons: "0"
+            },
+            Earth: {
+                modelUrl: "GLB/Earth.glb",
+                diameter: "12,742 km",
+                distance: "149.6 million km",
+                moons: "1"
+            },
+            Mars: {
+                modelUrl: "GLB/Mars.glb",
+                diameter: "6,779 km",
+                distance: "227.9 million km",
+                moons: "2"
+            },
+            Jupiter: {
+                modelUrl: "GLB/Jupiter.glb",
+                diameter: "139,820 km",
+                distance: "778.5 million km",
+                moons: "79"
+            },
+            Saturn: {
+                modelUrl: "GLB/Saturn.glb",
+                diameter: "116,460 km",
+                distance: "1.4 billion km",
+                moons: "82"
+            },
+            Uranus: {
+                modelUrl: "GLB/Uranus.glb",
+                diameter: "50,724 km",
+                distance: "2.9 billion km",
+                moons: "27"
+            },
+            Neptune: {
+                modelUrl: "GLB/Neptune.glb",
+                diameter: "49,244 km",
+                distance: "4.5 billion km",
+                moons: "14"
+            },
+            Moon: {
+                modelUrl: "GLB/Moon.glb",
+                diameter: "3,474.8 km",
+                distance: "384,400 km",
+                moons: "0"
+            },
+            Pluto: {
+                modelUrl: "GLB/Pluto_1_2374.glb",
+                diameter: "2,377 km",
+                distance: "5.9 billion km",
+                moons: "5"
+            }
+        };
+
+        const spaceData = {
+            CStatic: {
+                modelUrl: "GLB/Curiosity_static.glb",
+                Info: "Curiosity is a car-sized Mars rover exploring Gale crater and Mount Sharp on Mars as part of NASA's Mars Science Laboratory (MSL) mission.Curiosity was launched from Cape Canaveral (CCAFS) on November 26, 2011, at 15:02:00 UTC and landed on Aeolis Palus inside Gale crater on Mars on August 6, 2012, 05:17:57 UTC.The Bradbury Landing site was less than 2.4 km (1.5 mi) from the center of the rover's touchdown target after a 560 million km (350 million mi) journey."
+            },
+            DeepSpace: {
+                modelUrl: "GLB/DSN_34M_BWG.glb",
+                Info: "The Deep Space Network - or DSN - is NASA’s international array of giant radio antennas that supports interplanetary spacecraft missions, plus a few that orbit Earth. The DSN also provides radar and radio astronomy observations that improve our understanding of the solar system and the larger universe."
+            },
+            Hubble: {
+                modelUrl: "GLB/Hubble.glb",
+                Info: "Hubble is solar-powered. Hubble takes sharp pictures of objects in the sky such as planets, stars and galaxies. Hubble has made more than one million observations. These include detailed pictures of the birth and death of stars, galaxies billions of light years away, and comet pieces crashing into Jupiter's atmosphere."
+            },
+            SpaceStation: {
+                modelUrl: "GLB/ISS_stationary.glb",
+                Info: "The space station is made of parts that were assembled in space by astronauts. It orbits Earth at an average altitude of approximately 250 miles. It travels at 17,500 mph. This means it orbits Earth every 90 minutes."
+            },
+            MARCO: {
+                modelUrl: "GLB/MarCO.glb",
+                Info: "MarCO-A and B are the first and second interplanetary CubeSats designed to monitor InSight for a short period around landing and to demonstration a potential future capability. The MarCO pair carried their own communications and navigation experiments as they flew independently to the Red Planet."
+            },
+            MAR: {
+                modelUrl: "GLB/MER_static.glb",
+                Info: "NASA's Mars Exploration Rover (MER) mission was a robotic space mission involving two Mars rovers, Spirit and Opportunity, exploring the planet Mars. It began in 2003 with the launch of the two rovers to explore the Martian surface and geology; both landed on Mars at separate locations in January 2004. Both rovers far outlived their planned missions of 90 Martian solar days: MER-A Spirit was active until March 22, 2010,while MER-B Opportunity was active until June 10, 2018."
+            },
+            Pegasus: {
+                modelUrl: "GLB/Pegasus_XL.glb",
+                Info: "The aerodynamic lift, generated by the rocket's triangle-shaped wing, delivers the payload into orbit in about 10 minutes. Pegasus is used to deploy small satellites weighing up to 1,000 pounds into low-Earth orbit from virtually anywhere in the world where a runway with support and checkout facilities is available."
+            },
+            Voyager: {
+                modelUrl: "GLB/Voyager.glb",
+                Info: "Voyager 2 is a space probe launched by NASA on August 20, 1977, to study the outer planets and interstellar space beyond the Sun's heliosphere. As a part of the Voyager program, it was launched 16 days before its twin, Voyager 1, on a trajectory that took longer to reach gas giants Jupiter and Saturn but enabled further encounters with ice giants Uranus and Neptune."
+            }
+        };
+
+        $(function () {
+            const planetNames = Object.keys(modelData);
+            const spaceNames = Object.keys(spaceData);
+
+            $("#planet-input").autocomplete({
+                source: [...planetNames, ...spaceNames]
+            });
+        });
+
+        function displayModel() {
+            const input = $("#planet-input").val();
+            const planet = modelData[input];
+            const spaceObject = spaceData[input];
+            const modelContainer = $("#model-container");
+            const detailsContainer = $("#details-container");
+
+            if (planet) {
+                modelContainer.html(`<model-viewer src="${planet.modelUrl}" auto-rotate camera-controls alt="${input} Model" style="width: 400px; height: 400px;"></model-viewer>`);
+                detailsContainer.html(`
+                    <p><strong>Name:</strong> ${input}</p>
+                    <p><strong>Diameter:</strong> ${planet.diameter}</p>
+                    <p><strong>Distance from the Sun:</strong> ${planet.distance}</p>
+                    <p><strong>Number of Moons:</strong> ${planet.moons}</p>
+                `);
+            } else if (spaceObject) {
+                modelContainer.html(`<model-viewer src="${spaceObject.modelUrl}" auto-rotate camera-controls alt="${input} Model" style="width: 400px; height: 400px;"></model-viewer>`);
+                detailsContainer.html(`
+                    <p><strong>Name:</strong> ${input}</p>
+                    <p><strong>Information:</strong> ${spaceObject.Info}</p>
+                `);
+            } else {
+                modelContainer.html('No model found.');
+                detailsContainer.empty();
+            }
+        }
+    </script>
+</body>
+
+</html>
