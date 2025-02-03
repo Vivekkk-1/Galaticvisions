@@ -23,9 +23,27 @@ A web-based interactive 3D Planet & Object Viewer that allows users to explore p
 - **Google Model Viewer**: For displaying 3D models of planets and space objects.
 - **jQuery UI**: For implementing the autocomplete feature in the search bar.
 
-## Demo
+## Sections
 
-You can view the live demo of the project [here](insert-link-to-demo).
+### 1. Home Page
+The **Home** page serves as the main entry point to explore the universe, offering access to various sections of the site.
+
+![Home Page](Home.png)
+
+### 2. Day to Event
+This page displays upcoming events related to space exploration and astronomy, such as rocket launches, space missions, and star-gazing events.
+
+![Day to Event](day-to-event.png)
+
+### 3. 3D Model Viewer
+The **3D Model Viewer** allows users to view interactive 3D models of planets, moons, and spacecraft, providing an immersive experience.
+
+![3D Model Viewer](3d-model.png)
+
+### 4. Gallery
+The **Gallery** showcases stunning images and renderings of planets, galaxies, and space phenomena.
+
+![Gallery](Gallery.png)
 
 ## Getting Started
 
@@ -38,4 +56,4 @@ To run the project locally, you need to have a modern web browser (e.g., Chrome,
 1. Clone the repository to your local machine using Git:
 
    ```bash
-   git clone https://github.com/Vivek7738/Galaticvisions.git
+      git clone https://github.com/Vivek7738/Galaticvisions.git
