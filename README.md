@@ -47,7 +47,7 @@ The **Gallery** showcases stunning images and renderings of planets, galaxies, a
 
 ## 🔮 Live Preview
 
-[✨ View the Live](https://galacticvisions.netlify.app/3dmodel) 
+[✨ View the Live](https://galacticvisions.netlify.app) 
 
 ## Getting Started
 
